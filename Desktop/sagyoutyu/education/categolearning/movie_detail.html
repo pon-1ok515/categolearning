@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<head>
+  <title>Categolearnig_moviedetail</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="./movie_detail.css">
+</head>
+<body>
+<div class="header">
+  <div class="header-logo">Categolearnig&#x270f;</div>
+  <div class="header-list">
+    <ul>
+      <li><a href="https://mdle.tufs.ac.jp/moodle/login/index.php">検索</li></a>
+      <li><a href="https://ja.bab.la/活用/ポーランド語/">ログイン</li></a>
+      <li><a href="https://nacademy.tufs.ac.jp/anet2/">投稿</li></a>
+    </ul>
+  </div>
+</div>
+<div class="main">
+  <!--動画詳細部  どうしたらいいかわからない-->
+  <div class="movie_title">
+    動画タイトル
+  </div>
+  <div class="movie">
+    <!--動画情報が一定にしかならない-->
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/dR4wW2Cl7qY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+  <div class="movie_genre">
+    ここで単元を書きたいどこから情報を引っ張るの？
+  </div>
+    <!--コメント欄コピペ-->
+  <br>
+  <table border="0" cellspacing="0" cellpadding="1">
+    <tr>
+      <td>
+  <form method="POST" action="comment.php?rep=1" target="com">
+  <span style="font-size:18px;font-weight:100;color:#ff0000">コメント </span><b>一言コメントをどうぞ！</b>（500字まで）<br>
+  <textarea type="text" id="comment" name="comment" cols="50" rows="10">
+  </textarea>
+  <input type="submit" id="submit" value=" 送信 " style="width:54">
+      </td></form>
+    </tr>
+    <tr>
+      <td>
+  <div id="commentv" style="font-size:13px;line-height:15px;color:#666699;width:580px;height:160px;border:1px solid #00ccff;padding:8px;overflow-y:scroll;display:none;"></div>
+  <iframe name="com" src="comment.php" id="com" style="width:301px;height:201px;frameborder:0px;border:0px;padding:0px;overflow:hidden;display:none;"></iframe>
+      </td>
+    </tr>
+  </table>
+  <br>
+<!--コメントが誰でも打てる状態になっている-->
