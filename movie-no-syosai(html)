@@ -1,0 +1,44 @@
+<html lang="ja">
+<!-- 詳細ページ -->
+<head>
+  <meta charset="utf-8">
+  <% @page_title = "show" %>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Categolearnig&#x270f;<span>～学習動画投稿＆再生サイト～</span></h1>
+  </div>
+  
+  <div class="menu">
+<a href="/home/index">ログイン・新規登録</a>
+    </div>
+    
+  <div class="title">
+    <%= @movie.title %>
+  </div>
+  
+ <div class="movie-show">
+   <div>投稿者：<%= @movie.user.name %><br>投稿時間：<%= @movie.created_at %><br>
+     教科：<%= @movie.subject %>　　単元：<%= @movie.unit %></div>
+   <iframe src="https://www.youtube.com/embed/<%= @movie.link %>" width="560" height="315"></iframe>
+   <div><%= @movie.body %></div>
+   </div>
+   
+   <div class="comments">
+     <div>コメント</div>
+     <% @comments.each do |c| %>
+     <div><!-- コメント閲覧 -->
+       <%= c.user.name %>：<%= c.body %><hr>
+       <% end %>
+     </div>
+     <% if user_signed_in? %><!-- もしログインしていたらコメント投稿欄が出てくる -->
+     <%= form_for [@movie, @comment] do |f| %>
+     <%= f.text_area :body %>
+     <br>
+     <%= f.submit 'コメントする' %>
+     <% end %>
+     <% end %>
+   </div>
+</body>
+</html>
