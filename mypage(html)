@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!-- マイページ（過去の投稿） -->
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <% page_title = "Home" %>
+</head>
+<body>
+  <div class="current_user"><!-- ユーザーのプロフィール -->
+    <%= @user.name %><br><!-- ユーザー名 -->
+    <%= @user.status %><br><!-- 学生or教師 -->
+    <!-- 以下3行がメニューになる。divタグでくくって外に出したり順番換えたりして大丈夫 -->
+    <%= link_to 'プロフィール編集',  edit_user_registration_path %><br>
+    <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %><br>
+    <%= link_to 'アップロード', new_movie_path %>
+    </div>
+    <div class="user_movies">過去の投稿<!-- 投稿履歴 -->
+      <div class="movie-container">
+        <% @user_movies.each do |m| %><hr>
+        <%= m.title %><br><!-- タイトル -->
+        <%= m.created_at %><br><!-- 投稿時間 -->
+        <%= m.subject %><br><!-- 教科 -->
+        <%= m.unit %><br><!-- 単元 -->
+        <iframe src="https://www.youtube.com/embed/<%= m.link %>" width="280" height="152">
+          </iframe><br><!-- 動画埋め込み -->
+          <%= link_to "詳細", movie_path(m.id) %><!-- 詳細ページ -->
+          <% end %>
+        </div>
+    </div>
+  </body>
+</html>
