@@ -11,46 +11,51 @@
   <div class="menu">
     <a href="/home/index">ログイン・新規登録</a><br>
     <a href="/users/<%=current_user.id%>">ホームへ</a>
-    <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %><br>
+    <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %><br><!-- 何らかの不具合でログアウトできないので見た目だけです -->
     <%= link_to 'アップロード', new_movie_path %>
     <%= link_to '投稿履歴', users_show_path %>
   </div>
-  <div class="current_user">
-    <%= @user.name %><br>
-    <%= @user.status %><br>
-    <%= link_to 'プロフィール編集',  edit_user_registration_path %><br>
+  <div class="current_user"><!-- ユーザーのプロフィール欄 -->
+    <%= @user.name %><br><!-- ユーザー名 -->
+    <%= @user.status %><br><!-- 学生or教師 -->
+    <%= link_to 'プロフィール編集',  edit_user_registration_path %><br><!-- 上記項目やアドレス、パスワードの変更が可能 -->
     </div>
       <div class="title">
     動画一覧
       </div>
-      <div class="search">
+      <div class="search"><!-- 検索フォーム -->
         <%= form_tag({controller:"users",action:"index"}, method: :get) do %>
-        <%= label_tag :name, "タイトル" %>
+        
+        <%= label_tag :name, "タイトル" %><!-- タイトル検索 -->
         <%= text_field_tag :title, params[:title] %><br>
-        <%= label_tag :name, "教科" %>
+        
+        <%= label_tag :name, "教科" %><!-- 教科検索 -->
         <%= select_tag "subject", options_for_select([["国語", "国語"], ["数学", "数学"], ["英語", "英語"],
           ["理科", "理科"], ["社会", "社会"], ["その他", "その他"]]), include_blank: true %>
-          <%= label_tag :name, "単元" %>
+        
+        <%= label_tag :name, "単元" %><!-- 単元検索 -->
           <%= select_tag "unit", options_for_select([["勉強法", "勉強法"], ["文の種類", "文の種類"], ["五文型", "五文型"],
             ["時制", "時制"], ["不定詞", "不定詞"], ["動名詞", "動名詞"], ["分詞", "分詞"],
             ["助動詞", "助動詞"], ["受動態", "受動態"], ["関係詞", "関係詞"], ["仮定法", "仮定法"],
             ["接続詞", "接続詞"], ["形容詞・副詞", "形容詞・副詞"], ["比較", "比較"], ["強調構文", "強調構文"],
             ["話法", "話法"], ["単語学習", "単語学習"], ["センター対策", "センター対策"],
             ["国立二次・私大対策", "国立二次・私大対策"], ["その他", "その他"]]), include_blank: true  %>
-        <%= submit_tag '検索' %>
+        
+        <%= submit_tag '検索' %><!-- 検索ボタン -->
         <% end %>
       </div>
-     <div class="movie-container">
+      
+     <div class="movie-container"><!-- タイムライン -->
        <% @movies.each do |m| %>
        <hr>
-       <%= m.title %><br>
-       <%= m.user.name %><br>
-       <%= m.created_at %><br>
-       <%= m.subject %><br>
-       <%= m.unit %><br>
+       <%= m.title %><br><!-- タイトル -->
+       <%= m.user.name %><br><!-- 投稿者 -->
+       <%= m.created_at %><br><!-- 投稿時間 -->
+       <%= m.subject %><br><!-- 教科 -->
+       <%= m.unit %><br><!-- 単元 -->
        <iframe src="https://www.youtube.com/embed/<%= m.link %>" width="280" height="152">
-         </iframe><br>
-          <%= link_to "詳細", movie_path(m.id) %>
+         </iframe><br><!-- 動画埋め込み -->
+          <%= link_to "詳細", movie_path(m.id) %><!-- 詳細リンク -->
        <% end %>
        </div>
   </body>
